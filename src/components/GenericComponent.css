@@ -1,0 +1,24 @@
+.result-container {
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+  .result-title {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .result-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .result-value {
+    font-size: 48px;
+    color: #007bff;
+    font-weight: bold;
+  }
+  

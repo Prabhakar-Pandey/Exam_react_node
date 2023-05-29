@@ -1,10 +1,23 @@
 import React from 'react';
 import {render} from 'react-dom';
-
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import QuestionComponent from './components/QuestionComponent'
 import Result from './components/Result';
 import GenericComponent from './components/GenericComponent';
 import AdminForm from './components/AdminForm'
+
+
+function Questions({status, questionIndex, question, options}){
+    return (
+        <div>
+            {/* <AdminForm /> */}
+          {status === "EXAM_COMPLETED" && <Result />}
+          {status === "NOT_STARTED" && <GenericComponent status={status} msg="Exam will start in a while" />}
+          {status === "STARTED" && <QuestionComponent questionIndex={questionIndex} question={question} options={options} />}
+          {status === "LOADING_TIME" && <GenericComponent status={status} msg="Preparing Questions" />}
+        </div>
+    )
+}
 
 function App(){
     const [question,setQuestion]=React.useState("")
@@ -35,13 +48,13 @@ function App(){
       
       console.log(status)
       return (
-        <div>
-            {/* <AdminForm /> */}
-          {status === "EXAM_COMPLETED" && <Result />}
-          {status === "NOT_STARTED" && <GenericComponent status={status} msg="Exam will start in a while" />}
-          {status === "STARTED" && <QuestionComponent questionIndex={questionIndex} question={question} options={options} />}
-          {status === "LOADING_TIME" && <GenericComponent status={status} msg="Preparing Questions" />}
-        </div>
+        <Router>
+            <Routes>
+            <Route path="/" element={<Questions questionIndex={questionIndex} options={options} status={status} question={question} />} />
+            <Route path="/admin" element={<AdminForm />} />
+            </Routes>
+        </Router>
+        
       );
 }
 
